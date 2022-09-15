@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} Sign In {% endblock %}
+{% block content %}
+
+<!-- Sign In Page Start Here     -->
+<section style="min-height:77vh">
+    <div class="container">
+        <div class="row pt-4">
+            <div class="col-lg-5 offset-lg-3 col-md-6 col-sm-12" style="max-height:730px">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="container-fluid px-4 px-lg-0">
+                        </div>
+                        <div class="login-box animate__animated animate__fadeInDown">
+<!--                             {% if form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                        {{ error|escape }}
+                                        <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+                                            <span class="text-white" aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                        {{ error|escape }}
+                                        <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+                                            <span class="text-white" aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %} -->
+                            {% for message in messages %}
+                                <div class="alert alert-warning alert-dismissible" role="alert">
+                                    <p class="">{{ message }} </p>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span class="text-dark" aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+
+                            <h2 class="letter-spacing py-4">LOGIN</h2>
+                            <form method="post" action="{% url 'authentication:signin' %}">
+                            {% csrf_token %}
+                              <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" class="form-control" name="login" required="">
+                              </div>
+                              <div class="form-group pt-3">
+                                <label>Password</label>
+                                <input type="password" class="form-control" name="password" required="">
+                              </div>
+                              <div class="pt-4 w-100">
+                                <button class="float-right btn-block btn btn-primary" type="submit">Submit</button>
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 pt-5">
+                    <div class="text-center text-white pl-5">
+                        <p class="">Don't have an account? <a href="{% url 'authentication:signup' %}" class="text-warning h5 ml-2">Sign Up</a>
+                        </p>
+                        <p class="p-0 pt-2"><a href="{% url 'account_reset_password' %}" class="text-light">Forgot your password?</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+      </div>
+  </div>
+</section>
+{% endblock %}

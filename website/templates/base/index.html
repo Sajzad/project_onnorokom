@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<section class="pt-4" id="app" style="height:90vh; overflow-y:scroll">
+		<div class="container">
+			<div class="text-center">
+				<p class="h3">Videos</p>
+			</div>
+			<div class="row pt-4">
+				<div class="col-md-4 p-1" v-for='item in videos'>
+					<iframe width="400" height="300" :src="item.src">
+					</iframe>
+					<div class="d-flex">
+						<span><i class="fal fa-thumbs-up"></i></span>
+						<span class="ml-4"><i class="fal mr-5 fa-thumbs-down"></i></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/vue/index.js' %}"></script>
+{% endblock %}
