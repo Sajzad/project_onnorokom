@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="app" class="container pt-5">
+	<div class="row">
+		<div class="col-md-6 mx-auto">
+			<h4 class="pb-3 text-center">Total Videos - [[videos.length]]</h4>
+			<div class="row" v-for='item in videos'>
+				<div class="col-md-9 p-1 pb-3 mx-auto">
+					<iframe width="100%" height="250" :src="item.src">
+					</iframe>
+					<div class="d-flex pt-1">
+						<div class="pointer">
+							<i 
+								class="fal fa-thumbs-up"></i><span class="px-1">[[item.like_count]]</span>
+						</div>
+						<div class="px-4 pointer">
+							<i 
+								class="fal fa-thumbs-down"></i><span class="px-1">[[item.dislike_count]]</span>
+						</div>
+						<div class="pointer">
+							<i 
+								class="fal fa-eye"></i><span class="px-1">[[item.view_count]]</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
+{% block extra_js %}
+	<script src="{% static 'js/vue/myvideos.js' %}"></script>
+{% endblock %}

@@ -5,15 +5,47 @@
 	<section class="pt-4" id="app" style="height:90vh; overflow-y:scroll">
 		<div class="container">
 			<div class="text-center">
-				<p class="h3">Videos</p>
+				<p class="h3">Videos - [[videos.length]]</p>
 			</div>
-			<div class="row pt-4">
-				<div class="col-md-4 p-1" v-for='item in videos'>
-					<iframe width="400" height="300" :src="item.src">
-					</iframe>
-					<div class="d-flex">
-						<span><i class="fal fa-thumbs-up"></i></span>
-						<span class="ml-4"><i class="fal mr-5 fa-thumbs-down"></i></span>
+			<div class="row pt-2">
+				<!-- <pre>[[videos]]</pre> -->
+				<div class="col-md-6 mx-auto">
+						<!-- <p class="h5">Total Videos [[videos.length]]</p> -->
+
+					<div class="row" v-for='item in videos'>
+						<div class="col-md-9 p-1 pb-3">
+							<iframe width="100%" height="250" :src="item.src">
+							</iframe>
+							<div class="d-flex pt-1">
+								<div class="pointer">
+									{% if request.user.is_authenticated %}
+										<i 
+											@click = 'addLike(item)'
+											class="fal fa-thumbs-up"></i><span class="px-1">[[item.like_count]]</span>
+									{% else %}
+										<i 
+											class="fal fa-thumbs-up"></i><span class="px-1">[[item.like_count]]</span>
+									{% endif %}
+								</div>
+								<div class="px-4 pointer">
+									{% if request.user.is_authenticated %}
+										<i 
+											@click = 'addDislike(item)'
+											class="fal fa-thumbs-down"></i><span class="px-1">[[item.dislike_count]]</span>
+									{% else %}
+										<i 
+											class="fal fa-thumbs-down"></i><span class="px-1">[[item.dislike_count]]</span>
+									{% endif %}
+								</div>
+								<div class="pointer">
+									<i 
+										class="fal fa-eye"></i><span class="px-1">[[item.view_count]]</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 mx-auto">
+							<a @click='viewCount(item)' :href="'/watch/'+item.id" class="btn btn-primary">Details</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -21,5 +53,5 @@
 	</section>
 {% endblock %}
 {% block extra_js %}
-    <script type="text/javascript" src="{% static 'js/vue/index.js' %}"></script>
+    <script src="{% static 'js/vue/index.js' %}"></script>
 {% endblock %}

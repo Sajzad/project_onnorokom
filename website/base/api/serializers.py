@@ -2,20 +2,29 @@ from rest_framework import serializers
 
 from base.models import *
 
-# class UserSerializer(serializers.ModelSerializer):
-# 	class Meta:
-# 		model = User
-# 		fields = ('id','first_name', 'last_name', 'username')
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
+
+class UserSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = User
+		fields = ('id','first_name', 'last_name', 'username')
 
 class VideoSerializer(serializers.ModelSerializer):
+	user = UserSerializer()
+	like_count = serializers.IntegerField(default=0)
+	dislike_count = serializers.IntegerField(default=0)
 	class Meta:
 		model = Video
-		fields = '__all__'
+		fields = ('id','src', 'user', 'like_count', 'dislike_count', 'view_count')
 
-# class SubMaterialSerializer(serializers.ModelSerializer):
-# 	class Meta:
-# 		model = SubMaterial
-# 		fields = '__all__'
+class LikesSerializer(serializers.ModelSerializer):
+	user = UserSerializer(read_only=True)
+	class Meta:
+		model = MetaData
+		fields = ('user',)
 		
 # class MaterialSerializer(serializers.ModelSerializer):
 # 	sub_materials = SubMaterialSerializer(many=True, read_only=True)

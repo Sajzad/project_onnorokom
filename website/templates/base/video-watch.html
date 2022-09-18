@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="app" class="container pt-5">
+	<!-- Liked users Modal demo-->
+	<div class="modal fade" id="likes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content px-4">
+	      <div class="modal-body">
+	        <div> 
+	        	<p v-for='item in likes'>[[item.user.username]]</p>
+	        </div>
+	      </div>
+	      <div class="modal-footer border-none">
+	        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- Disliked users Modal-->
+	<div class="modal fade" id="dislikes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content px-4">
+	      <div class="modal-body">
+	        <div>
+	        	<p v-for='item in dislikes'>[[item.user.username]]</p>
+	        </div>
+	      </div>
+	      <div class="modal-footer border-none">
+	        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 mx-auto">
+			<div>
+				<iframe width="100%" height="700" :src="video.src+'?autoplay=1&mute=1'"></iframe>
+			</div>
+			<div class="pt-2 d-flex">
+				<!-- <pre>[[video]]</pre> -->
+				<div>
+					{% if request.user.is_authenticated %}
+					{% endif %}
+					<span>
+						<i class="far fa-eye px-2"></i>
+						[[video.view_count]] views
+					</span>
+					<span 
+						@click = 'getLikedUsers()' 
+						data-target = '#likes' 
+						data-toggle = 'modal' 
+						class = "text-primary px-2 pointer">likes - [[video.like_count]]</span>
+
+					<span 
+						@click = 'getDislikedUsers()' 
+						data-target = '#dislikes' 
+						data-toggle = 'modal' 
+						class = "text-primary px-2 pointer">Dislikes - [[video.dislike_count]]</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/vue/video-details.js' %}"></script>
+{% endblock %}

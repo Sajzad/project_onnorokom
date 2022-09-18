@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="app" class="container pt-5">
+	<div class="row pt-5">
+		<div class="col-md-6 mx-auto">
+			<form method="POST" @submit.prevent='addYtdVideos()'>
+				{% csrf_token %}
+					<div class="d-flex justify-content-between">
+						<h3 class="pb-3 text-center">Add Youtube Videos </h3>
+						<div>
+							<a href="/{{request.user.username}}/videos" class="btn btn-primary">My Videos</a>
+							<a href="{% url 'base:home' %}" class="btn btn-primary">Home</a>
+						</div>
+					</div>
+					<p v-show=is_added class="text-primary py-2 h6">Video is added</p>
+					<div class="form-group">
+						<label for="src">Video source *</label>
+						<input 
+							class = "form-control" 
+							type = "text"
+							id="src"
+							v-model = 'src' 
+							placeholder = "Place video source" 
+							name="">
+					</div>
+					<div class="pt-3 float-right w-100">
+						<button class="float-right btn btn-primary">Submit</button>
+					</div>
+			</form>
+		</div>
+	</div>
+</section>
+{% endblock %}
+{% block extra_js %}
+	<script src="{% static 'js/vue/dashboard.js' %}"></script>
+{% endblock %}

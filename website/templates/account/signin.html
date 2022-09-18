@@ -12,7 +12,7 @@
                     <div class="col-lg-12">
                         <div class="container-fluid px-4 px-lg-0">
                         </div>
-                        <div class="login-box animate__animated animate__fadeInDown">
+                        <div class="login-box">
 <!--                             {% if form.errors %}
                                 {% for field in form %}
                                     {% for error in field.errors %}
@@ -34,11 +34,9 @@
                                 {% endfor %}
                             {% endif %} -->
                             {% for message in messages %}
-                                <div class="alert alert-warning alert-dismissible" role="alert">
-                                    <p class="">{{ message }} </p>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span class="text-dark" aria-hidden="true">&times;</span>
-                                    </button>
+                                <div class="alert alert-warning alert-dismissible">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    {{message}}
                                 </div>
                             {% endfor %}
 
@@ -61,7 +59,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12 pt-5">
-                    <div class="text-center text-white pl-5">
+                    <div class="text-center pl-5">
                         <p class="">Don't have an account? <a href="{% url 'authentication:signup' %}" class="text-warning h5 ml-2">Sign Up</a>
                         </p>
                         <p class="p-0 pt-2"><a href="{% url 'account_reset_password' %}" class="text-light">Forgot your password?</a>

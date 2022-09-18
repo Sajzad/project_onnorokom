@@ -24,14 +24,11 @@
                     {% endfor %}
                 {% endif %} -->
                 {% for message in messages %}
-                    <div class="alert alert-warning alert-dismissible" role="alert">
-                        <p class="">{{ message }} </p>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span class="text-dark" aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        {{message}}
                     </div>
                 {% endfor %}
-
                 <form class="signup" id="signup_form" method="post" action="{% url 'authentication:signup' %}">
 
                 {% csrf_token %}
@@ -39,50 +36,38 @@
                     <div class="register-form">
                         <div class="form-group">
                             <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text bg-warning"><i class="fas fa-user-tie"></i></div>
-                                </div>
                                 <input type="text" class="form-control" placeholder="Username *" value="" name="username" required/>
                             </div>
                         </div>
                         <div class="form-group pt-2">
                             <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text bg-warning"><i class="fas fa-envelope"></i></div>
-                                </div>
                                 <input type="text" class="form-control" placeholder="Email *" value="" name="email" required/>
                             </div>
                         </div>
                         <div class="form-group pt-2">
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text bg-warning"><i class="fas fa-unlock"></i></div>
-                                </div>
                                 <input type="password" class="form-control" placeholder="Password *" value="" name="password1" required/>
                             </div>
                         </div>
                         <div class="form-group py-2">
                             <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text bg-warning"><i class="fas fa-lock"></i></div>
-                                </div>
                                 <input type="password" class="form-control"  placeholder="Confirm Password *" value="" name="password2" required/>
                             </div>
                         </div>
-                        <div class="form-group text-white row">
+                        <div class="form-group text-primary row">
                             <div class="col-lg-8 form-check">
                                 <input class="form-check-input text-info" type="checkbox" id="autoSizingCheck2">
                                 <label class="form-check-label" for="autoSizingCheck2">
                                     Remember me
                                 </label>
                             </div>
-                            <div class="col-lg-4">
-                                 <input type="submit" class="letter-spacing float-right btn btn-danger text-oswald px-3 py-2" value="Register">
-                            </div>
                         </div>
-                        <div class="form-group">
+                        <div class="pt-3">
+                             <input type="submit" class="btn w-100 btn-danger btn-block px-3 py-2" value="Register">
+                        </div>
+                        <div class="form-group pt-4 text-center">
                             <div class="">
-                                <p class='text-warning h6 pb-2'>Already have an account !</p>
+                                <p class='text-primary h5 pb-2'>Already have an account !</p>
                                 <a href="{% url 'authentication:signin' %}" type="submit" class="btn btn-warning float-left">Sign In</a>
                             </div>
                         </div>                    

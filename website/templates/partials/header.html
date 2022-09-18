@@ -1,0 +1,24 @@
+<div class="container pt-4">
+	<div class="d-flex justify-content-between">
+		<div>
+			<p class="h3">Project Onnorokom</p>
+		</div>
+		<div class="d-flex justify-content-center">
+			{% if request.user.is_authenticated %}
+				<div>
+					<a class="btn btn-primary btn-sm" href="{% url 'base:dashboard' %}">Dashboard</a>
+				</div>
+			{% endif %}
+			{% if not request.user.is_authenticated %}
+				<div>
+					<a class="btn btn-primary btn-sm mx-1" href="{% url 'authentication:signin' %}">Login</a>
+				</div>
+			{% else %}
+				<div>
+					<a class="btn btn-primary btn-sm mx-1" href="/accounts/logout">Logout</a>
+				</div>
+			{% endif %}
+		</div>
+
+	</div>
+</div>
